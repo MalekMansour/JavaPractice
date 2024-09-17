@@ -21,8 +21,8 @@ public class Refrigerator extends Appliance {
     public String toString() {
         return super.toString() +
                "\nNumber of Doors: " + getNumberOfDoorsDescription() +
-               "\nHeight: " + height + " inches" +
-               "\nWidth: " + width + " inches";
+               "\nHeight: " + height +
+               "\nWidth: " + width;
     }
 
     public int getNumberOfDoors() {
