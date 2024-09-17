@@ -21,8 +21,16 @@ public class ModernAppliances {
             System.out.println("5 – Save & exit");
             System.out.print("Enter option: ");
             
-            int option = scanner.nextInt();
-            scanner.nextLine(); 
+            String input = scanner.nextLine(); 
+            int option; 
+            
+            try {
+                option = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                // Handle non-integer input
+                System.out.println("Not a valid command. Please try again.");
+                continue;
+            }
 
             switch (option) {
                 case 1:
@@ -102,7 +110,7 @@ public class ModernAppliances {
         case 1:
             System.out.print("Enter number of doors: 2 (double door), 3 (three doors) or 4 (four doors): ");
             int doors = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            scanner.nextLine(); 
             System.out.println("Matching refrigerators:");
             for (Appliance appliance : appliances) {
                 if (appliance instanceof Refrigerator && ((Refrigerator) appliance).getNumberOfDoors() == doors) {
