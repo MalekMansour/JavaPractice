@@ -55,4 +55,3 @@ public abstract class Appliance {
                "\nWattage: " + wattage + "W\nColor: " + color + "\nPrice: $" + price;
     }
 }
-
