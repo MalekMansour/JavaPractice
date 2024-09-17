@@ -114,10 +114,18 @@ public class ModernAppliances {
                 System.out.print("Enter battery voltage value. 18 V (low) or 24 V (high): ");
                 String batteryVoltage = scanner.nextLine();
                 System.out.println("Matching vacuums:");
+                boolean found = false;
                 for (Appliance appliance : appliances) {
-                    if (appliance instanceof Vacuum && ((Vacuum) appliance).getBatteryVoltage().equalsIgnoreCase(batteryVoltage)) {
-                        System.out.println(appliance);
+                    if (appliance instanceof Vacuum) {
+                        Vacuum vacuum = (Vacuum) appliance;
+                        if (vacuum.getBatteryVoltage().equalsIgnoreCase(batteryVoltage)) {
+                            System.out.println(vacuum);
+                            found = true;
+                        }
                     }
+                }
+                if (!found) {
+                    System.out.println("No matching vacuums found.");
                 }
                 break;
             case 3:
@@ -125,18 +133,24 @@ public class ModernAppliances {
                 String roomType = scanner.nextLine().toUpperCase();
                 System.out.println("Matching microwaves:");
                 for (Appliance appliance : appliances) {
-                    if (appliance instanceof Microwave && ((Microwave) appliance).getRoomType().equalsIgnoreCase(roomType)) {
-                        System.out.println(appliance);
+                    if (appliance instanceof Microwave) {
+                        Microwave microwave = (Microwave) appliance;
+                        if (microwave.getRoomType().equalsIgnoreCase(roomType)) {
+                            System.out.println(microwave);
+                        }
                     }
                 }
                 break;
             case 4:
-                System.out.println("Enter the sound rating of the dishwasher: Qt (Quietest), Qr (Quieter), Qu (Quiet), or M (Moderate): ");
-                String soundRating = scanner.nextLine().toUpperCase(); 
+                System.out.print("Enter the sound rating of the dishwasher: Qt (Quietest), Qr (Quieter), Qu (Quiet), or M (Moderate): ");
+                String soundRating = scanner.nextLine().toUpperCase();
                 System.out.println("Matching dishwashers:");
                 for (Appliance appliance : appliances) {
-                    if (appliance instanceof Dishwasher && ((Dishwasher) appliance).getSoundRating().equalsIgnoreCase(soundRating)) {
-                        System.out.println(appliance);
+                    if (appliance instanceof Dishwasher) {
+                        Dishwasher dishwasher = (Dishwasher) appliance;
+                        if (dishwasher.getSoundRating().equalsIgnoreCase(soundRating)) {
+                            System.out.println(dishwasher);
+                        }
                     }
                 }
                 break;
@@ -144,7 +158,7 @@ public class ModernAppliances {
                 System.out.println("Invalid appliance type.");
         }
     }
-
+    
     private static void produceRandomApplianceList(Scanner scanner) {
         System.out.print("Enter number of random appliances: ");
         int number = scanner.nextInt();
