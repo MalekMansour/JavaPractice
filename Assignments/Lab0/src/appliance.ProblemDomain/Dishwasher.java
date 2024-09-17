@@ -7,11 +7,26 @@ public class Dishwasher extends Appliance {
     public Dishwasher(String[] data) {
         super(data);
         this.feature = data[6];
-        this.soundRating = data[7];  
+        this.soundRating = data[7];
+    }
+
+    public String getFeature() {
+        return feature;
     }
 
     public String getSoundRating() {
-        return soundRating;
+        switch (soundRating.toUpperCase()) {
+            case "QT":
+                return "Quietest";
+            case "QR":
+                return "Quieter";
+            case "QU":
+                return "Quiet";
+            case "M":
+                return "Moderate";
+            default:
+                return "Unknown";
+        }
     }
 
     @Override
@@ -21,6 +36,6 @@ public class Dishwasher extends Appliance {
 
     @Override
     public String toString() {
-        return super.toString() + "\nFeature: " + feature + "\nSoundRating: " + soundRating;
+        return super.toString() + "\nFeature: " + feature + "\nSound Rating: " + getSoundRating();
     }
 }
