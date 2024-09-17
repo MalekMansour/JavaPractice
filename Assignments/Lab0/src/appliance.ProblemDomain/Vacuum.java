@@ -14,6 +14,10 @@ public class Vacuum extends Appliance {
         return batteryVoltage;
     }
 
+    public String getBatteryVoltageDisplay() {
+        return "18".equalsIgnoreCase(batteryVoltage) ? "Low" : "High";
+    }
+
     @Override
     public String toFileFormat() {
         return String.join(";", itemNumber, brand, String.valueOf(quantity), String.valueOf(wattage), color, String.valueOf(price), grade, batteryVoltage);
@@ -21,6 +25,6 @@ public class Vacuum extends Appliance {
 
     @Override
     public String toString() {
-        return super.toString() + "\nGrade: " + grade + "\nBattery Voltage: " + batteryVoltage;
+        return super.toString() + "\nGrade: " + grade + "\nBattery Voltage: " + getBatteryVoltageDisplay();
     }
 }
