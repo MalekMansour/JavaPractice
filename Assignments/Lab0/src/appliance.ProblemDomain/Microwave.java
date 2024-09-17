@@ -6,12 +6,16 @@ public class Microwave extends Appliance {
 
     public Microwave(String[] data) {
         super(data);
-        this.capacity = Double.parseDouble(data[6]); 
-        this.roomType = data[7]; 
+        this.capacity = Double.parseDouble(data[6]);
+        this.roomType = data[7];
     }
 
     public String getRoomType() {
         return roomType;
+    }
+
+    public String getRoomTypeDisplay() {
+        return "K".equalsIgnoreCase(roomType) ? "Kitchen" : "Work Site";
     }
 
     @Override
@@ -21,6 +25,6 @@ public class Microwave extends Appliance {
 
     @Override
     public String toString() {
-        return super.toString() + "\nCapacity: " + capacity + "\nRoom Type: " + roomType;
+        return super.toString() + "\nCapacity: " + capacity + "\nRoom Type: " + getRoomTypeDisplay();
     }
 }
