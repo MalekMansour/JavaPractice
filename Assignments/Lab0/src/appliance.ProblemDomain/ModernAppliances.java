@@ -1,17 +1,29 @@
+/* 
+Date: 2024-09-17
+Author: Malek Mansour
+Description: Modern Appliances manages a list of household appliances (Vacuums, Microwaves, Refrigerators, Dishwashers). 
+The program allows the user to check out appliances by brand or by type. Users can also generate a random list of appliances. 
+The program reads appliance data from the appliances.txt file. It processes the user's commands from the interface and can save 
+updated data back to the file. Inputs include user commands and other parameters like item number, brand, or type. 
+*/
+
 package appliance.ProblemDomain;
 
 import java.io.*;
 import java.util.*;
 
 public class ModernAppliances {
-
+	
+	// This is the list to store all the appliances
     private static List<Appliance> appliances = new ArrayList<>();
 
     public static void main(String[] args) {
+    	// Load appliances from appliances.txt when the program starts
         loadAppliancesFromFile("src/appliances.txt");
         Scanner scanner = new Scanner(System.in);
-
+        // Main loop for user inputs
         while (true) {
+        	// Display the main menu
             System.out.println("Welcome to Modern Appliances!");
             System.out.println("How may we assist you?");
             System.out.println("1 – Check out appliance");
@@ -25,13 +37,15 @@ public class ModernAppliances {
             int option; 
             
             try {
+            	// convert the user input to an integer
                 option = Integer.parseInt(input);
             } catch (NumberFormatException e) {
-                // Handle non-integer input
+                // if input is not an integer
                 System.out.println("Not a valid command. Please try again.");
                 continue;
             }
-
+            
+            // Process the user's choice
             switch (option) {
                 case 1:
                     checkOutAppliance(scanner);
@@ -49,11 +63,13 @@ public class ModernAppliances {
                     saveAndExit();
                     return;
                 default:
+                	// Handle invalid options
                     System.out.println("Invalid option. Please try again.");
             }
         }
     }
 
+    // Method to handle checking out an appliance
     private static void checkOutAppliance(Scanner scanner) {
         System.out.print("Enter the item number of an appliance: ");
         String itemNumber = scanner.nextLine();
@@ -77,6 +93,7 @@ public class ModernAppliances {
         }
     }
 
+    // Method to find appliances by brand
     private static void findApplianceByBrand(Scanner scanner) {
         System.out.print("Enter brand to search for: ");
         String brand = scanner.nextLine();
@@ -95,6 +112,7 @@ public class ModernAppliances {
         }
     }
 
+    // Method to display appliances by type
     private static void displayApplianceByType(Scanner scanner) {
         System.out.println("Appliance Types");
         System.out.println("1 – Refrigerators");
@@ -157,7 +175,6 @@ public class ModernAppliances {
                 for (Appliance appliance : appliances) {
                     if (appliance instanceof Dishwasher) {
                         Dishwasher dishwasher = (Dishwasher) appliance;
-                        // Debug output
                         System.out.println("Checking dishwasher: " + dishwasher);
                         if (dishwasher.getSoundRating().equalsIgnoreCase(soundRatingInput)) {
                             System.out.println(dishwasher);
@@ -170,24 +187,28 @@ public class ModernAppliances {
                 }
                 break;
             default:
+            	// Handle invalid appliance type
                 System.out.println("Invalid appliance type.");
         }
     }
 
-    
+    // Method to produce a random list of appliances
     private static void produceRandomApplianceList(Scanner scanner) {
         System.out.print("Enter number of random appliances: ");
         int number = scanner.nextInt();
         scanner.nextLine(); 
         
+        // Shuffle the list and print a random selection of appliances
         Collections.shuffle(appliances);
         for (int i = 0; i < Math.min(number, appliances.size()); i++) {
             System.out.println(appliances.get(i));
         }
     }
 
+    // Method to save data to file and exit the program
     private static void saveAndExit() {
         try (PrintWriter writer = new PrintWriter(new FileWriter("src/appliances.txt"))) {
+        	// Write each appliance to the file (appliances.txt)
             for (Appliance appliance : appliances) {
                 writer.println(appliance.toFileFormat());
             }
@@ -197,6 +218,7 @@ public class ModernAppliances {
         }
     }
 
+    // Method to load appliances from a file
     private static void loadAppliancesFromFile(String filePath) {
         try (Scanner scanner = new Scanner(new File(filePath))) {
             while (scanner.hasNextLine()) {
@@ -210,9 +232,11 @@ public class ModernAppliances {
         }
     }
 
+    // Method to create an appliance object from file data
     private static Appliance createApplianceFromData(String[] data) {
         String itemNumber = data[0];
         switch (itemNumber.charAt(0)) {
+     // Determine appliance type based on item number
             case '1':
                 return new Refrigerator(data);
             case '2':
