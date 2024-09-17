@@ -52,6 +52,6 @@ public abstract class Appliance {
     @Override
     public String toString() {
         return "Item Number: " + itemNumber + "\nBrand: " + brand + "\nQuantity: " + quantity +
-               "\nWattage: " + wattage + "W\nColor: " + color + "\nPrice: $" + price;
+               "\nWattage: " + wattage + "\nColor: " + color + "\nPrice: $" + price;
     }
 }
